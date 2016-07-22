@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="appAdminCMS"
+  id="myeclipse.1468996597367"
+  context-root="/appAdminCMS"
+  j2ee-spec="6.0"
+  archive="appAdminCMS.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,13 @@
+.form-actions{
+	width:100px;
+	margin:10px auto;
+	background-color:#F9F9F9;
+	border-top:none;
+}
+
+input[type="text"]{
+	height:30px;
+}
+textarea{
+	height:400px;
+}
