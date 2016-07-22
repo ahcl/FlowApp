@@ -91,17 +91,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h5>活动发布</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="#" method="post" class="form-horizontal" name="f1"/>
+								<form action="active/add.do" method="post" class="form-horizontal" name="f1" />
 									<div class="control-group">
 										<label class="control-label">活动标题</label>
 										<div class="controls">
-											<input type="text"/>
+											<input type="text" name="activeName"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">活动内容</label>
 										<div class="controls">
-											<textarea></textarea>
+											<textarea name="activeContent"></textarea>
 										</div>
 									</div>
 									<div class="control-group">
@@ -110,6 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<input type="file" id="f" name="f" onchange="result()"/>
 											<div id="d1"></div>
 											<div id="d2"></div>
+											<input type="hidden" name="activeImg" id="activeImg"/>
 											<span class="help-block">活动banner页面</span>
 										</div>
 									</div>

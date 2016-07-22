@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hzbc.app.admin.cms.dao.ActiveDao">
+	
+	<insert id="addActive" parameterType="com.hzbc.app.admin.cms.entity.Active" >
+		insert into t_active(id,activeName,activeContent,activeUpDate,activeImg,activeFlag,adminId) values(#{id},#{activeName},#{activeContent},#{activeUpDate},#{activeImg},#{activeFlag},#{adminId})
+	</insert>
+	
+		
+</mapper>
