@@ -50,7 +50,7 @@ public class ActiveController {
 		List<Active> active  = activeService.findActive();
 		//System.out.println(active);
 		model.addAttribute("active",active);
-		return "../active";
+		return "../admin/active";
 		
 	}
 }

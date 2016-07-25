@@ -160,7 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</li>
 									<li>
 										<div class="user-thumb">
-											<img width="40" height="40" alt="User" src="img/demo/av3.jpg" />
+											<img width="40" height="40" alt="User" src="${pageContext.request.contextPath}/img/demo/av3.jpg" />
 										</div>
 										<div class="article-post">
 											<span class="user-info"> By: john on on 24 Jun 2012, 04:12 PM, IP: 192.168.24.3 </span>
@@ -172,7 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</li>
 									<li>
 										<div class="user-thumb">
-											<img width="40" height="40" alt="User" src="img/demo/av1.jpg" />
+											<img width="40" height="40" alt="User" src="${pageContext.request.contextPath}/img/demo/av1.jpg" />
 										</div>
 										<div class="article-post">
 											<span class="user-info"> By: michelle on 22 Jun 2012, 02:44 PM, IP: 172.10.56.3 </span>
@@ -220,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</li>
 									<li>
 										<div class="user-thumb">
-											<img width="40" height="40" alt="User" src="img/demo/av2.jpg" />
+											<img width="40" height="40" alt="User" src="${pageContext.request.contextPath}/img/admin/demo/av2.jpg" />
 										</div>
 										<div class="comments">
 											<span class="user-info"> User: neytiri on IP: 186.56.45.7 </span>
@@ -257,15 +257,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		
 
-            <script src="${pageContext.request.contextPath}/js/excanvas.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/jquery.ui.custom.js"></script>
-            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/jquery.flot.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/jquery.flot.resize.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/jquery.peity.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/fullcalendar.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/unicorn.js"></script>
-            <script src="${pageContext.request.contextPath}/js/unicorn.dashboard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/excanvas.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/jquery.flot.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/jquery.flot.resize.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/jquery.peity.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/fullcalendar.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/js/admin/unicorn.dashboard.js"></script>
   </body>
 </html>

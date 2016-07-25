@@ -3,7 +3,7 @@
   type="WEB"
   name="flowApp"
   id="myeclipse.1468996597367"
-  context-root="/appAdminCMS"
+  context-root="/flowApp"
   j2ee-spec="6.0"
   archive="flowApp.war">
   <attributes>
