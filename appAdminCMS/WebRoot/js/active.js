@@ -29,6 +29,7 @@ function result(){
 				   data:"myfiles="+document.f1.f.name,
 				   success: function(msg){ 
 					   activeImg.value=msg;
+					   alert("1");
 				   }
 				   });
 			
