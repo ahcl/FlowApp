@@ -20,7 +20,7 @@ function result(){
 			div2.style.display="block";
 			div2.appendChild(img);
 			//activeImg.value=fr.result;
-			//alert(fr.result);
+			//alert(document.f1.f.name);
 			$.ajax({
 				   type: "POST",
 				  /* async:false,  

@@ -18,11 +18,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-		<link rel="stylesheet" href="css/fullcalendar.css" />	
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/fullcalendar.css" />	
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/unicorn.grey.css" class="skin-color" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
@@ -257,15 +257,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		
 
-            <script src="js/excanvas.min.js"></script>
-            <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.flot.min.js"></script>
-            <script src="js/jquery.flot.resize.min.js"></script>
-            <script src="js/jquery.peity.min.js"></script>
-            <script src="js/fullcalendar.min.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.dashboard.js"></script>
+            <script src="${pageContext.request.contextPath}/js/excanvas.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.flot.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.flot.resize.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/jquery.peity.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/fullcalendar.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/js/unicorn.dashboard.js"></script>
   </body>
 </html>

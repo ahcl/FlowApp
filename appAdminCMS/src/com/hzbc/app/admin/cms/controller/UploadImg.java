@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,7 @@ public class UploadImg {
 	 */
 	@RequestMapping("/img")
 	@ResponseBody
-	public static List<String> imageHandle(MultipartFile[] myfiles, HttpServletRequest request){
+	public static String imageHandle(@RequestParam MultipartFile[] myfiles, HttpServletRequest request){
 		//处理上传图片
 		System.out.println("123");
 		List<String> imgPathList = new ArrayList<String>();
@@ -39,7 +40,6 @@ public class UploadImg {
                 System.out.println("文件名称: " + myfile.getName());  
                 System.out.println("文件原名: " + myfile.getOriginalFilename());  
                 System.out.println("========================================");  
-                
 //                //如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中  
 //                String realPath = request.getSession().getServletContext().getRealPath("/upload"); 
                 //使用自定义文件资源库
@@ -62,6 +62,6 @@ public class UploadImg {
             }  
         }  
 		
-		return imgPathList;
+		return "jsp/success";
 	}
 }

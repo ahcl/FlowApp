@@ -7,5 +7,11 @@
 		insert into t_active(id,activeName,activeContent,activeUpDate,activeImg,activeFlag,adminId) values(#{id},#{activeName},#{activeContent},#{activeUpDate},#{activeImg},#{activeFlag},#{adminId})
 	</insert>
 	
+	<select id="findActiveById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.Active">
+		 select id,activeName,activeUpDate,activeImg,adminId from t_active where id = #{id,jdbcType=NUMERIC};
+	</select>
 		
+	<select id="findActive" resultType="com.hzbc.app.admin.cms.entity.Active">
+		 select id,activeName,activeUpDate,activeFlag,adminId from t_active;
+	</select>
 </mapper>

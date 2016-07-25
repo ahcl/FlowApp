@@ -1,6 +1,7 @@
 package com.hzbc.app.admin.cms.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Active {
 	private Integer id;
