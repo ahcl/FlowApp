@@ -10,4 +10,8 @@ public interface ActiveDao {
 	public void addActive(Active active);
 	public List<Active> findActiveById(Integer id);
 	public List<Active> findActive();
+	public void deleteActiveById(Integer id);
+	public void updateFlagById(Integer id);
+	public void delUpdateFlagById(Integer id);
+	public List<Active> showFourth();
 }

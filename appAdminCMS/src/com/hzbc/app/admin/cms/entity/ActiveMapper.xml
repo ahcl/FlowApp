@@ -8,10 +8,25 @@
 	</insert>
 	
 	<select id="findActiveById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.Active">
-		 select id,activeName,activeUpDate,activeImg,adminId from t_active where id = #{id,jdbcType=NUMERIC};
+		 select id,activeName,activeContent,activeUpDate,activeImg,adminId from t_active where id = #{id,jdbcType=NUMERIC};
 	</select>
 		
 	<select id="findActive" resultType="com.hzbc.app.admin.cms.entity.Active">
-		 select id,activeName,activeUpDate,activeFlag,adminId from t_active;
+		 select id,activeName,activeUpDate,activeImg,activeFlag,adminId from t_active order by id desc;
+	</select>
+	
+	<delete id="deleteActiveById" parameterType="int">
+	 	delete from t_active where id = #{id,jdbcType=NUMERIC};
+	</delete>
+	
+	<update id="updateFlagById" parameterType="int">
+		update t_active set activeFlag = 1 where id = #{id,jdbcType=NUMERIC};
+	</update>
+	<update id="delUpdateFlagById" parameterType="int">
+		update t_active set activeFlag = 0 where id = #{id,jdbcType=NUMERIC};
+	</update>
+	
+	<select id="showFourth" resultType="com.hzbc.app.admin.cms.entity.Active">
+		 select id,activeImg from t_active order by id desc limit 0,4;
 	</select>
 </mapper>

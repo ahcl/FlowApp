@@ -24,4 +24,27 @@ public interface ActiveService {
 	 */
 	public List<Active> findActive();
 	
+	/**
+	 * 根据id删除活动
+	 * @param id
+	 */
+	public void deleteActiveById(Integer id);
+	
+	/**
+	 * 发布活动
+	 * @param id
+	 */
+	public void updateFlagById(Integer id);
+	
+	/**
+	 * 取消发布
+	 * @param id
+	 */
+	public void delUpdateFlagById(Integer id);
+	
+	/**
+	 * 显示最前面的四条活动的banner
+	 */
+	public List<Active> showFourth();
+	
 }

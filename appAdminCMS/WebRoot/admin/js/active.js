@@ -21,37 +21,30 @@ function result(){
 			div2.appendChild(img);
 			//activeImg.value=fr.result;
 			//alert(document.f1.f.name);
-			$.ajax({
-				   type: "POST",
-				  /* async:false,  
-				   cache:false,*/
-				   url: "upload/img.do",
-				   data:"myfiles="+document.f1.f.name,
-				   success: function(msg){ 
-					   activeImg.value=msg;
-					   alert("1");
-				   }
-				   });
-			
 			};
 			}
 			else{
 				//div1.style.value="请上传正确的格式";
 				document.getElementsByTagName("p")[0].innerHTML = "不是图片类型，请重新上传<br>";
 			}
-			}
-//图片路径保存
-function getImg(){
-	 var file = document.getElementById("f").name;
-	 var activeImg = document.getElementById("activeImg");
-	$.ajax({
-		   type: "POST",
-		  /* async:false,  
-		   cache:false,*/
-		   url: "upload/img.do",
-		   data:"myfiles="+document.f1.file.name,
-		   success: function(msg){ 
-			   activeImg.value=msg;
-		   }
-		   });
+}
+//删除活动
+function delActive(id){
+	if(confirm('是否删除')){
+		 window.location.href="active/delActive.do?id="+id;
+	}
+}
+
+//取消发布
+function delUpdateFlag(id){
+	if(confirm('撤销发布？')){
+		 window.location.href="active/delUpdateFlag.do?id="+id;
+	}
+}
+
+//发布
+function updateFlag(id){
+	if(confirm('是否发布?')){
+		 window.location.href="active/updateFlag.do?id="+id;
+	}
 }

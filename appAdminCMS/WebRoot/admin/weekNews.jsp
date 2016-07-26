@@ -1,4 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+request.setCharacterEncoding("UTF-8");
+String htmlData = request.getParameter("content1") != null ? request.getParameter("content1") : "";
+%>
 <%--  <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,19 +21,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-			<meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-        <link rel="stylesheet" href="css/colorpicker.css" />
-        <link rel="stylesheet" href="css/datepicker.css" />
-		<link rel="stylesheet" href="css/uniform.css" />
-		<link rel="stylesheet" href="css/select2.css" />		
-		<link rel="stylesheet" href="css/unicorn.main.css" />
-		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />	
-		<link rel="stylesheet" href="css/active.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+			
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/colorpicker.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/datepicker.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/uniform.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/select2.css" />		
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.grey.css" class="skin-color" />	
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/active.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/themes/default/default.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/plugins/code/prettify.css" />
+	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/kindeditor.js"></script>
+		<script charset="utf-8" src="${pageContext.request.contextPath}/admin/kindeditor-min.js"></script>
+	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/plugins/code/prettify.js"></script>
+	<script>
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="activeContent"]', {
+				cssPath : 'plugins/code/prettify.css',
+				uploadJson : '${pageContext.request.contextPath}/admin/jsp/upload_json.jsp',
+				fileManagerJson : '${pageContext.request.contextPath}/admin/jsp/file_manager_json.jsp',
+				allowFileManager : true,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+	</script>
+	
   </head>
   
   <body>
@@ -91,25 +124,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h5>周报发布</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="#" method="post" class="form-horizontal" name="f1"/>
+								<form action="${pageContext.request.contextPath}/active/add.do" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/>
 									<div class="control-group">
 										<label class="control-label">周报标题</label>
 										<div class="controls">
-											<input type="text"/>
+											<input type="text" name="activeName"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">周报内容</label>
 										<div class="controls">
-											<textarea></textarea>
+											<!-- <textarea name="activeContent"></textarea> -->
+											<textarea name="activeContent"  visibility:hidden;"><%=htmlspecialchars(htmlData)%></textarea>
+											<br />
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">上传图片</label>
 										<div class="controls">
-											<input type="file" id="f" name="f" onchange="result()"/>
+											<input type="file" id="f" name="myfiles" onchange="result()"/>
 											<div id="d1"></div>
 											<div id="d2"></div>
+											<input type="hidden" name="activeImg" id="activeImg"/>
 											<span class="help-block">活动banner页面</span>
 										</div>
 									</div>
@@ -133,417 +169,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered data-table">
 									<thead>
 									<tr>
-									<th>周报编号</th>
-									<th>周报标题</th>
-									<th>周报内容</th>
+									<th>活动编号</th>
+									<th>活动标题</th>
 									<th>发布时间</th>
 									<th>发布人</th>
+									<th>是否发布</th>
+									<th>是否删除</th>
+									<th>预览</th>
+									<th>活动修改</th>
 									</tr>
 									</thead>
 									<tbody>
+									<c:forEach items="${active}" var="active">
 									<tr class="gradeX">
-									<td>1</td>
-									<td>Trident</td>
-									<td>Internet
-									Explorer 4.0</td>
-									<td>Win 95+</td>
-									<td class="center">4</td>
+									<td>${active.id}</td>
+									<td>${active.activeName}</td>
+									<td>${active.activeUpDate}</td>
+									<td>${active.adminId}</td>
+									<td class="action-td">	
+										<c:choose>
+											<c:when test="${active.activeFlag==1}">
+												<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
+													<i class="icon-remove"></i>						
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href="javascript:updateFlag(${active.id });" class="btn btn-small btn-warning">
+													<i class="icon-ok"></i>								
+												</a>
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td class="action-td">	
+										<a href="javascript:delActive(${active.id });" class="btn btn-small btnnew">
+													<i class="icon-remove"></i>						
+												</a>
+									</td>
+									<td>
+									<a href="active/findActive.do?id=${active.id }" class="btn btn-small btnnew">
+											查看					
+									</a>
+									</td>
+									<td>
+									<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
+											修改					
+									</a>
+									</td>
 									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>Trident</td>
-									<td>Internet
-									Explorer 5.0</td>
-									<td>Win 95+</td>
-									<td class="center">5</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Trident</td>
-									<td>Internet
-									Explorer 5.5</td>
-									<td>Win 95+</td>
-									<td class="center">5.5</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Trident</td>
-									<td>Internet
-									Explorer 6</td>
-									<td>Win 98+</td>
-									<td class="center">6</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Trident</td>
-									<td>Internet Explorer 7</td>
-									<td>Win XP SP2+</td>
-									<td class="center">7</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Trident</td>
-									<td>AOL browser (AOL desktop)</td>
-									<td>Win XP</td>
-									<td class="center">6</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Firefox 1.0</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.7</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Firefox 1.5</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Firefox 2.0</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Firefox 3.0</td>
-									<td>Win 2k+ / OSX.3+</td>
-									<td class="center">1.9</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Camino 1.0</td>
-									<td>OSX.2+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Camino 1.5</td>
-									<td>OSX.3+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Netscape 7.2</td>
-									<td>Win 95+ / Mac OS 8.6-9.2</td>
-									<td class="center">1.7</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Netscape Browser 8</td>
-									<td>Win 98SE+</td>
-									<td class="center">1.7</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Netscape Navigator 9</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.0</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.1</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.2</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.2</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.3</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.3</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.4</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.4</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.5</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.5</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.6</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">1.6</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.7</td>
-									<td>Win 98+ / OSX.1+</td>
-									<td class="center">1.7</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Mozilla 1.8</td>
-									<td>Win 98+ / OSX.1+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Seamonkey 1.1</td>
-									<td>Win 98+ / OSX.2+</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Gecko</td>
-									<td>Epiphany 2.20</td>
-									<td>Gnome</td>
-									<td class="center">1.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>Safari 1.2</td>
-									<td>OSX.3</td>
-									<td class="center">125.5</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>Safari 1.3</td>
-									<td>OSX.3</td>
-									<td class="center">312.8</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>Safari 2.0</td>
-									<td>OSX.4+</td>
-									<td class="center">419.3</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>Safari 3.0</td>
-									<td>OSX.4+</td>
-									<td class="center">522.1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>OmniWeb 5.5</td>
-									<td>OSX.4+</td>
-									<td class="center">420</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>iPod Touch / iPhone</td>
-									<td>iPod</td>
-									<td class="center">420.1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Webkit</td>
-									<td>S60</td>
-									<td>S60</td>
-									<td class="center">413</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 7.0</td>
-									<td>Win 95+ / OSX.1+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 7.5</td>
-									<td>Win 95+ / OSX.2+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 8.0</td>
-									<td>Win 95+ / OSX.2+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 8.5</td>
-									<td>Win 95+ / OSX.2+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 9.0</td>
-									<td>Win 95+ / OSX.3+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 9.2</td>
-									<td>Win 88+ / OSX.3+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera 9.5</td>
-									<td>Win 88+ / OSX.3+</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Opera for Wii</td>
-									<td>Wii</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Nokia N800</td>
-									<td>N800</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Presto</td>
-									<td>Nintendo DS browser</td>
-									<td>Nintendo DS</td>
-									<td class="center">8.5</td>
-									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>KHTML</td>
-									<td>Konqureror 3.1</td>
-									<td>KDE 3.1</td>
-									<td class="center">3.1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>KHTML</td>
-									<td>Konqureror 3.3</td>
-									<td>KDE 3.3</td>
-									<td class="center">3.3</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>KHTML</td>
-									<td>Konqureror 3.5</td>
-									<td>KDE 3.5</td>
-									<td class="center">3.5</td>
-									</tr>
-									<tr class="gradeX">
-									<td>1</td>
-									<td>Tasman</td>
-									<td>Internet Explorer 4.5</td>
-									<td>Mac OS 8-9</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>Tasman</td>
-									<td>Internet Explorer 5.1</td>
-									<td>Mac OS 7.6-9</td>
-									<td class="center">1</td>
-									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>Tasman</td>
-									<td>Internet Explorer 5.2</td>
-									<td>Mac OS 8-X</td>
-									<td class="center">1</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Misc</td>
-									<td>NetFront 3.1</td>
-									<td>Embedded devices</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeA">
-									<td>1</td>
-									<td>Misc</td>
-									<td>NetFront 3.4</td>
-									<td>Embedded devices</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeX">
-									<td>1</td>
-									<td>Misc</td>
-									<td>Dillo 0.8</td>
-									<td>Embedded devices</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeX">
-									<td>1</td>
-									<td>Misc</td>
-									<td>Links</td>
-									<td>Text only</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeX">
-									<td>1</td>
-									<td>Misc</td>
-									<td>Lynx</td>
-									<td>Text only</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>Misc</td>
-									<td>IE Mobile</td>
-									<td>Windows Mobile 6</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeC">
-									<td>1</td>
-									<td>Misc</td>
-									<td>PSP browser</td>
-									<td>PSP</td>
-									<td class="center">-</td>
-									</tr>
-									<tr class="gradeU">
-									<td>1</td>
-									<td>Other browsers</td>
-									<td>All others</td>
-									<td>-</td>
-									<td class="center">-</td>
-									</tr>
+									</c:forEach>
 									</tbody>
 									</table>  
 						
@@ -559,17 +232,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-            <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.ui.custom.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/bootstrap-colorpicker.js"></script>
-            <script src="js/bootstrap-datepicker.js"></script>
-            <script src="js/jquery.uniform.js"></script>
-            <script src="js/select2.min.js"></script>
-             <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/unicorn.js"></script>
-            <script src="js/unicorn.form_common.js"></script>
-             <script src="js/unicorn.tables.js"></script>
-            <script src="js/active.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap-colorpicker.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap-datepicker.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.uniform.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/select2.min.js"></script>
+             <script src="${pageContext.request.contextPath}/admin/js/jquery.dataTables.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/unicorn.form_common.js"></script>
+             <script src="${pageContext.request.contextPath}/admin/js/unicorn.tables.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/active.js"></script>
   </body>
 </html>
+<%!
+private String htmlspecialchars(String str) {
+	str = str.replaceAll("&", "&amp;");
+	str = str.replaceAll("<", "&lt;");
+	str = str.replaceAll(">", "&gt;");
+	str = str.replaceAll("\"", "&quot;");
+	return str;
+}
+%>

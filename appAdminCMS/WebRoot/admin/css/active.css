@@ -11,3 +11,6 @@ input[type="text"]{
 textarea{
 	height:400px;
 }
+.table th,.table td{
+	text-align: center;
+}

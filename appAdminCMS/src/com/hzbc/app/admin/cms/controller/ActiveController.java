@@ -32,7 +32,7 @@ public class ActiveController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//调用图片上传工具
 		List<String> pathImg= commonUtil.uploadImg(myfiles, request);
-		System.out.println(pathImg.get(0));
+		//System.out.println(pathImg.get(0));
 		//存入数据库
 		a1.setActiveName(active.getActiveName());
 		a1.setActiveContent(active.getActiveContent());
@@ -52,5 +52,38 @@ public class ActiveController {
 		model.addAttribute("active",active);
 		return "../admin/active";
 		
+	}
+	
+	@RequestMapping("delActive")
+	public String deleteActiveById(int id){
+		activeService.deleteActiveById(id);
+		return "redirect:findAll.do";
+	}
+	
+	@RequestMapping("updateFlag")
+	public String updateFlagById(int id){
+		activeService.updateFlagById(id);
+		return "redirect:findAll.do";
+	}
+	
+	@RequestMapping("delUpdateFlag")
+	public String delUpdateFlagById(int id){
+		activeService.delUpdateFlagById(id);
+		return "redirect:findAll.do";
+	}
+	
+	@RequestMapping("findActive")
+	public String findActiveById(int id,Model model){
+		List<Active> active = activeService.findActiveById(id);
+		model.addAttribute("active", active);
+		//System.out.println(active);
+		return "../admin/test";
+	}
+	
+	@RequestMapping("showFourth")
+	public String showFourth(){
+		List<Active> active = activeService.showFourth();
+		System.out.println(active);
+		return "";
 	}
 }

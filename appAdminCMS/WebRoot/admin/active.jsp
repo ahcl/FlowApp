@@ -19,15 +19,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 			<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/bootstrap.min.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/bootstrap-responsive.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/colorpicker.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/datepicker.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/uniform.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/select2.css" />		
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/unicorn.main.css" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/unicorn.grey.css" class="skin-color" />	
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/active.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/colorpicker.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/datepicker.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/uniform.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/select2.css" />		
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.main.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.grey.css" class="skin-color" />	
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/active.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
   </head>
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h5>活动列表</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<table class="table table-bordered data-table" style="text-align:center !important;">
+								<table class="table table-bordered data-table">
 									<thead>
 									<tr>
 									<th>活动编号</th>
@@ -140,6 +140,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th>发布时间</th>
 									<th>发布人</th>
 									<th>是否发布</th>
+									<th>是否删除</th>
+									<th>预览</th>
+									<th>活动修改</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -151,17 +154,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<td>${active.adminId}</td>
 									<td class="action-td">	
 										<c:choose>
-											<c:when test="${active.activeFlag==1 }">
-												<a href="javascript:updateElite(${active.id });" class="btn btn-small btnnew">
+											<c:when test="${active.activeFlag==1}">
+												<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
 													<i class="icon-remove"></i>						
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href="javascript:updateElite(${active.id });" class="btn btn-small btn-warning">
+												<a href="javascript:updateFlag(${active.id });" class="btn btn-small btn-warning">
 													<i class="icon-ok"></i>								
 												</a>
 											</c:otherwise>
 										</c:choose>
+									</td>
+									<td class="action-td">	
+										<a href="javascript:delActive(${active.id });" class="btn btn-small btnnew">
+													<i class="icon-remove"></i>						
+												</a>
+									</td>
+									<td>
+									<a href="active/findActive.do?id=${active.id }" class="btn btn-small btnnew">
+											查看					
+									</a>
+									</td>
+									<td>
+									<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
+											修改					
+									</a>
 									</td>
 									</tr>
 									</c:forEach>
@@ -180,17 +198,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-            <script src="${pageContext.request.contextPath}/js/admin/jquery.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/jquery.ui.custom.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/bootstrap.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/bootstrap-colorpicker.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/bootstrap-datepicker.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/jquery.uniform.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/select2.min.js"></script>
-             <script src="${pageContext.request.contextPath}/js/admin/jquery.dataTables.min.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/unicorn.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/unicorn.form_common.js"></script>
-             <script src="${pageContext.request.contextPath}/js/admin/unicorn.tables.js"></script>
-            <script src="${pageContext.request.contextPath}/js/admin/active.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.ui.custom.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap-colorpicker.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/bootstrap-datepicker.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/jquery.uniform.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/select2.min.js"></script>
+             <script src="${pageContext.request.contextPath}/admin/js/jquery.dataTables.min.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/unicorn.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/unicorn.form_common.js"></script>
+             <script src="${pageContext.request.contextPath}/admin/js/unicorn.tables.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/active.js"></script>
   </body>
 </html>

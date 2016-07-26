@@ -30,6 +30,29 @@ public class ActiveServiceImpl implements ActiveService {
 	public List<Active> findActive() {
 		return activeDao.findActive();
 	}
+
+	@Override
+	public void deleteActiveById(Integer id) {
+		activeDao.deleteActiveById(id);
+	}
+
+	@Override
+	public void updateFlagById(Integer id) {
+		activeDao.updateFlagById(id);
+		
+	}
+
+	@Override
+	public void delUpdateFlagById(Integer id) {
+		activeDao.delUpdateFlagById(id);
+		
+	}
+
+	@Override
+	public List<Active> showFourth() {
+		return activeDao.showFourth();
+		
+	}
 	
 
 }
