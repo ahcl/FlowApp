@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.hzbc.app.admin.cms.dao.NewsDao">
+	
+	<insert id="addNews" parameterType="com.hzbc.app.admin.cms.entity.News" >
+		insert into t_news(id,newsName,newsContent,newsUpDate,newsImg,newsFlag,adminId) values(#{id},#{newsName},#{newsContent},#{newsUpDate},#{newsImg},#{newsFlag},#{adminId})
+	</insert>
+	
+	<select id="findNewsById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
+			
+	</select>
+	<select id="findNewsByTime" resultType="com.hzbc.app.admin.cms.entity.News">
+		select id,newsName,newsImg from t_news where newsFlag = 0 order by newsUpDate desc;
+	</select>
+		
+	<select id="findNews" resultType="com.hzbc.app.admin.cms.entity.News">
+		select *from t_news;
+	</select>
+	
+	<delete id="deleteNewsById" parameterType="int">
+	</delete>
+	
+	<update id="updateFlagById" parameterType="int">
+	</update>
+	<update id="delUpdateFlagById" parameterType="int">
+	</update>
+	
+	<select id="showFourth" resultType="com.hzbc.app.admin.cms.entity.Active">
+	</select>
+</mapper>

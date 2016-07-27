@@ -1,0 +1,13 @@
+package com.hzbc.app.admin.cms.dao;
+
+import java.util.List;
+
+import com.hzbc.app.admin.cms.annotation.MyAnnotation;
+import com.hzbc.app.admin.cms.entity.News;
+
+@MyAnnotation
+public interface NewsDao {
+	public void addNews(News news);
+	public List<News> findNews();
+	public List<News> findNewsByTime();
+}

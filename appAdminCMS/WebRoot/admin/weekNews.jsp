@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
+<%-- <%
 request.setCharacterEncoding("UTF-8");
 String htmlData = request.getParameter("content1") != null ? request.getParameter("content1") : "";
-%>
+%> --%>
 <%--  <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -32,16 +32,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/select2.css" />		
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.main.css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/unicorn.grey.css" class="skin-color" />	
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/active.css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/themes/default/default.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/plugins/code/prettify.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/admin/css/weekNews.css"">
 	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/kindeditor.js"></script>
 		<script charset="utf-8" src="${pageContext.request.contextPath}/admin/kindeditor-min.js"></script>
 	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/lang/zh_CN.js"></script>
 	<script charset="utf-8" src="${pageContext.request.contextPath}/admin/plugins/code/prettify.js"></script>
+	
 	<script>
 		KindEditor.ready(function(K) {
-			var editor1 = K.create('textarea[name="activeContent"]', {
+			var editor1 = K.create('textarea[name="newsContent"]', {
 				cssPath : 'plugins/code/prettify.css',
 				uploadJson : '${pageContext.request.contextPath}/admin/jsp/upload_json.jsp',
 				fileManagerJson : '${pageContext.request.contextPath}/admin/jsp/file_manager_json.jsp',
@@ -50,11 +51,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var self = this;
 					K.ctrl(document, 13, function() {
 						self.sync();
-						document.forms['example'].submit();
+						document.forms['f1'].submit();
 					});
 					K.ctrl(self.edit.doc, 13, function() {
 						self.sync();
-						document.forms['example'].submit();
+						document.forms['f1'].submit();
 					});
 				}
 			});
@@ -115,7 +116,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="container-fluid">
 				<div class="row-fluid">
-					<div class="span12">
+					<div class="span3">
+						<div class="widget-box">
+							<div class="widget-title">
+							<span class="icon">
+									<i class="icon-align-justify"></i>									
+								</span>
+								<h5>发布列表</h5>
+								</div>
+							<div class="widget-content nopadding">
+								<ul class="thumbnails">
+									<li class="span11">
+										<a href="#" class="thumbnail">
+										<!-- <img src="http://placehold.it/140x140" alt="">	 -->
+											<div class="cover-img-top"></div>
+											<div class="cover-img-top-title">
+											<p class="title">标题</p>
+											</div>
+										</a>
+										<div class="actions">
+										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
+										<a title="" href="#"><i class="icon-remove icon-white"></i></a>
+										</div>
+									</li>
+									<c:forEach items="${news2}" var="news2">
+									<li class="span11">
+										<a href="#" class="thumbnail">
+										<!-- <img src="http://placehold.it/140x140" alt="">	 -->
+											<div class="cover-img-little">
+											<div class="cover-img-little-left">
+											<p class="litle-title">${news2.newsName }</p>
+											</div>
+											<div class="cover-img-little-right">
+												<img class="images" src="${pageContext.request.contextPath}/${news2.newsImg }">
+											</div>
+											</div>
+										</a>
+										<div class="actions">
+										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
+										<a title="" href="#"><i class="icon-remove icon-white"></i></a>
+										</div>
+									</li>
+									</c:forEach>
+								</ul>
+								<div class="span10 divplus">
+										<a class="thumbnail plus">
+											<i class="icon-plus icon-white"></i>&nbsp;添加
+										</a>
+									<!-- 	<a class="thumbnail plus">
+											发布
+										</a> -->	
+										
+								</div>
+								<button type="submit" class="btn btn-primary bnt-new btn-plus">发布</button>
+							</div>
+						</div>
+					</div>
+			<div class="span9">
 						<div class="widget-box">
 							<div class="widget-title">
 								<span class="icon">
@@ -124,18 +181,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h5>周报发布</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="${pageContext.request.contextPath}/active/add.do" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/>
+								<form action="${pageContext.request.contextPath}/news/add.do" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/>
 									<div class="control-group">
 										<label class="control-label">周报标题</label>
 										<div class="controls">
-											<input type="text" name="activeName"/>
+											<input type="text" name="newsName"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">周报内容</label>
 										<div class="controls">
 											<!-- <textarea name="activeContent"></textarea> -->
-											<textarea name="activeContent"  visibility:hidden;"><%=htmlspecialchars(htmlData)%></textarea>
+											<textarea name="newsContent" visibility:hidden;"></textarea>
 											<br />
 										</div>
 									</div>
@@ -145,7 +202,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<input type="file" id="f" name="myfiles" onchange="result()"/>
 											<div id="d1"></div>
 											<div id="d2"></div>
-											<input type="hidden" name="activeImg" id="activeImg"/>
+											<input type="hidden" name="newsImg" id="newsImg"/>
 											<span class="help-block">活动banner页面</span>
 										</div>
 									</div>
@@ -158,7 +215,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</div>						
 					</div>
-		
+
 				<div class="row-fluid">
 					<div class="widget-box">
 							<div class="widget-title">
@@ -169,49 +226,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<table class="table table-bordered data-table">
 									<thead>
 									<tr>
-									<th>活动编号</th>
-									<th>活动标题</th>
+									<th>周报编号</th>
+									<th>周报标题</th>
 									<th>发布时间</th>
 									<th>发布人</th>
 									<th>是否发布</th>
 									<th>是否删除</th>
 									<th>预览</th>
-									<th>活动修改</th>
+									<th>周报修改</th>
 									</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${active}" var="active">
+									<c:forEach items="${news}" var="news">
 									<tr class="gradeX">
-									<td>${active.id}</td>
-									<td>${active.activeName}</td>
-									<td>${active.activeUpDate}</td>
-									<td>${active.adminId}</td>
+									<td>${news.id}</td>
+									<td>${news.newsName}</td>
+									<td>${news.newsUpDate}</td>
+									<td>${news.adminId}</td>
 									<td class="action-td">	
 										<c:choose>
-											<c:when test="${active.activeFlag==1}">
-												<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
+											<c:when test="${news.newsFlag==1}">
+												<a href="javascript:delUpdateFlag(${news.id });" class="btn btn-small btnnew">
 													<i class="icon-remove"></i>						
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href="javascript:updateFlag(${active.id });" class="btn btn-small btn-warning">
+												<a href="javascript:updateFlag(${news.id });" class="btn btn-small btn-warning">
 													<i class="icon-ok"></i>								
 												</a>
 											</c:otherwise>
 										</c:choose>
 									</td>
 									<td class="action-td">	
-										<a href="javascript:delActive(${active.id });" class="btn btn-small btnnew">
+										<a href="javascript:delActive(${news.id });" class="btn btn-small btnnew">
 													<i class="icon-remove"></i>						
 												</a>
 									</td>
 									<td>
-									<a href="active/findActive.do?id=${active.id }" class="btn btn-small btnnew">
+									<a href="active/findActive.do?id=${news.id }" class="btn btn-small btnnew">
 											查看					
 									</a>
 									</td>
 									<td>
-									<a href="javascript:delUpdateFlag(${active.id });" class="btn btn-small btnnew">
+									<a href="javascript:delUpdateFlag(${news.id });" class="btn btn-small btnnew">
 											修改					
 									</a>
 									</td>
@@ -223,7 +280,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 				</div>
-			</div>
+		
 
 				<div class="row-fluid">
 					<div id="footer" class="span12">
@@ -243,7 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <script src="${pageContext.request.contextPath}/admin/js/unicorn.js"></script>
             <script src="${pageContext.request.contextPath}/admin/js/unicorn.form_common.js"></script>
              <script src="${pageContext.request.contextPath}/admin/js/unicorn.tables.js"></script>
-            <script src="${pageContext.request.contextPath}/admin/js/active.js"></script>
+            <script src="${pageContext.request.contextPath}/admin/js/weekNews.js"></script>
   </body>
 </html>
 <%!

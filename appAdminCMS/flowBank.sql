@@ -10,6 +10,16 @@ CREATE TABLE t_active(
 		activeImg varchar(500) NOT NULL,
 		activeFlag int(2) DEFAULT NULL,
 		adminId int DEFAULT NULL
-	)ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=utf8;
-
-
+	)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+	
+DROP TABLE IF EXISTS `t_news`;
+CREATE TABLE t_news(
+		id int PRIMARY KEY auto_increment,
+		newsName varchar(500) not null default '',
+		newsContent text NOT NULL,
+		newsUpDate timestamp NULL DEFAULT NULL,
+		newsImg varchar(500) NOT NULL,
+		newsFlag int DEFAULT 0,
+		adminId int DEFAULT NULL,
+		newsCount int DEFAULT 0
+	)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
