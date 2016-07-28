@@ -26,7 +26,9 @@ public class NewsController {
 	public NewsService newsService;
 	
 	@RequestMapping("add")
-	public String addNews(News news, @RequestParam MultipartFile[] myfiles, HttpServletRequest request){
+	public String addNews(News news, @RequestParam MultipartFile[] myfiles, HttpServletRequest request,String radio){
+		
+	
 		CommonUtil commonUtil = new CommonUtil();
 		News n1 = new News();
 		//获取当前时间
@@ -41,17 +43,26 @@ public class NewsController {
 		n1.setNewsUpDate(dateFormat.format(date));
 		n1.setNewsImg(pathImg.get(0));
 		n1.setAdminId(1);
+		if(radio.equals("yes")){
+			n1.setNewsTop(1);
+		}else{
+			n1.setNewsTop(0);
+		}
 		newsService.addNews(n1);
 		return "redirect:findAll.do";
+		/*return "../jsp/success";*/
 	}
 	
 	@RequestMapping("/findAll")
-	public String findNews(Model model){
+	public String findNews(Model model,HttpServletRequest request){
 		/*List<News> news1  = newsService.findNews();*/
 		List<News> news2 = newsService.findNewsByTime();
+		List<News> newsTop = newsService.findNewsByTop();
 		//System.out.println(active);
 		System.out.println(news2);
+		request.setAttribute("check", 1);
 		model.addAttribute("news2",news2);
+		model.addAttribute("newsTop", newsTop);
 		return "../admin/weekNews";
 		
 	}

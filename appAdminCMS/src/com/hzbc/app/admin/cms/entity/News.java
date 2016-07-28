@@ -9,6 +9,7 @@ public class News {
 	public Integer newsFlag;
 	public Integer adminId;
 	public Integer newsCount;
+	public Integer newsTop;
 	public Integer getId() {
 		return id;
 	}
@@ -57,6 +58,13 @@ public class News {
 	public void setNewsCount(Integer newsCount) {
 		this.newsCount = newsCount;
 	}
+	
+	public Integer getNewsTop() {
+		return newsTop;
+	}
+	public void setNewsTop(Integer newsTop) {
+		this.newsTop = newsTop;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,6 +80,7 @@ public class News {
 		result = prime * result + ((newsImg == null) ? 0 : newsImg.hashCode());
 		result = prime * result
 				+ ((newsName == null) ? 0 : newsName.hashCode());
+		result = prime * result + ((newsTop == null) ? 0 : newsTop.hashCode());
 		result = prime * result
 				+ ((newsUpDate == null) ? 0 : newsUpDate.hashCode());
 		return result;
@@ -120,6 +129,11 @@ public class News {
 				return false;
 		} else if (!newsName.equals(other.newsName))
 			return false;
+		if (newsTop == null) {
+			if (other.newsTop != null)
+				return false;
+		} else if (!newsTop.equals(other.newsTop))
+			return false;
 		if (newsUpDate == null) {
 			if (other.newsUpDate != null)
 				return false;
@@ -127,17 +141,33 @@ public class News {
 			return false;
 		return true;
 	}
+	public News(Integer id, String newsName, String newsContent,
+			String newsImg, String newsUpDate, Integer newsFlag,
+			Integer adminId, Integer newsCount, Integer newsTop) {
+		super();
+		this.id = id;
+		this.newsName = newsName;
+		this.newsContent = newsContent;
+		this.newsImg = newsImg;
+		this.newsUpDate = newsUpDate;
+		this.newsFlag = newsFlag;
+		this.adminId = adminId;
+		this.newsCount = newsCount;
+		this.newsTop = newsTop;
+	}
 	@Override
 	public String toString() {
 		return "News [id=" + id + ", newsName=" + newsName + ", newsContent="
 				+ newsContent + ", newsImg=" + newsImg + ", newsUpDate="
 				+ newsUpDate + ", newsFlag=" + newsFlag + ", adminId="
-				+ adminId + ", newsCount=" + newsCount + "]";
+				+ adminId + ", newsCount=" + newsCount + ", newsTop=" + newsTop
+				+ "]";
 	}
 	public News() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	
 	
 

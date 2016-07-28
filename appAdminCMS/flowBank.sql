@@ -23,3 +23,5 @@ CREATE TABLE t_news(
 		adminId int DEFAULT NULL,
 		newsCount int DEFAULT 0
 	)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+alter table t_news add newsTop int default '0';

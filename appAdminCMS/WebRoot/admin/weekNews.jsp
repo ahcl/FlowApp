@@ -61,11 +61,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 			prettyPrint();
 		});
+		
+		function check(){
+			var check = '<%=request.getAttribute("check")%>';
+			/* alert(check); */
+					if(check=="1"){
+						$("#listyle").css("display","none");
+					}else{
+					
+						$("#listyle").css("display","block");
+					}
+		}
 	</script>
 	
   </head>
   
-  <body>
+  <body onload="check()">
     <div id="header">
 			<h1><a href="./dashboard.html">Unicorn Admin</a></h1>		
 		</div>
@@ -126,19 +137,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							<div class="widget-content nopadding">
 								<ul class="thumbnails">
-									<li class="span11">
+								<li class="span11" id="listyle">
 										<a href="#" class="thumbnail">
 										<!-- <img src="http://placehold.it/140x140" alt="">	 -->
-											<div class="cover-img-top"></div>
+											<div class="cover-img-top">
+											</div>
 											<div class="cover-img-top-title">
 											<p class="title">标题</p>
 											</div>
 										</a>
-										<div class="actions">
+										<div class="actions actions-new">
 										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-										<a title="" href="#"><i class="icon-remove icon-white"></i></a>
+										<!-- <a title="" href="#"><i class="icon-remove icon-white"></i></a> -->
 										</div>
 									</li>
+								<c:forEach items="${newsTop}" var="newsTop">
+									<li class="span11">
+										<a href="#" class="thumbnail">
+										<!-- <img src="http://placehold.it/140x140" alt="">	 -->
+											<div class="cover-img-top">
+											<img class="images" src="${pageContext.request.contextPath}/${newsTop.newsImg }">
+											</div>
+											<div class="cover-img-top-title">
+											<p class="title">${newsTop.newsName }</p>
+											</div>
+										</a>
+										<div class="actions actions-new">
+										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
+										<!-- <a title="" href="#"><i class="icon-remove icon-white"></i></a> -->
+										</div>
+									</li>
+									</c:forEach>
 									<c:forEach items="${news2}" var="news2">
 									<li class="span11">
 										<a href="#" class="thumbnail">
@@ -181,7 +210,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<h5>周报发布</h5>
 							</div>
 							<div class="widget-content nopadding">
-								<form action="${pageContext.request.contextPath}/news/add.do" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/>
+							<form action="${pageContext.request.contextPath}/news/add.do" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/> 
+								<!-- <form action="" method="post" class="form-horizontal" name="f1" enctype="multipart/form-data"/> -->
 									<div class="control-group">
 										<label class="control-label">周报标题</label>
 										<div class="controls">
@@ -206,10 +236,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<span class="help-block">活动banner页面</span>
 										</div>
 									</div>
-									
+									<div class="control-group">
+										<label class="control-label">新闻头条</label>
+										<div class="controls">
+											<!-- <div class="radio"> -->
+											<lable class="checkbox-inline"><input type="radio" value="yes" name="radio" id="optionsRadios1" checked="checked">是</lable>
+											&nbsp;&nbsp;<lable class="checkbox-inline"><input type="radio" value="no" name="radio" id="optionsRadios2">否</lable>
+											<!-- </div> -->
+											<span class="help-block">是否将该新闻设置为头条新闻</span>
+											
+										</div>
 									</div>
+									
+									<!-- </div> -->
 									<div class="form-actions">
-										<button type="submit" class="btn btn-primary bnt-new">保存</button>
+										<button type="submit" class="btn btn-primary bnt-new" id="savebt">保存</button>
 									</div>
 								</form>
 							</div>

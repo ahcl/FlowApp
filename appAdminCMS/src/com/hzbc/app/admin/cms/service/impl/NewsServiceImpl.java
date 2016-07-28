@@ -31,5 +31,10 @@ public class NewsServiceImpl implements NewsService {
 		// TODO Auto-generated method stub
 		return newsDao.findNewsByTime();
 	}
+	@Override
+	public List<News> findNewsByTop() {
+		// TODO Auto-generated method stub
+		return newsDao.findNewsByTop();
+	}
 
 }

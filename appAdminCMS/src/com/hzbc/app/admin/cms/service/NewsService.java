@@ -23,4 +23,10 @@ public interface NewsService {
 	 * @return
 	 */
 	public List<News> findNewsByTime();
+	
+	/**
+	 * 查找头条新闻
+	 * @return
+	 */
+	public List<News> findNewsByTop();
 }

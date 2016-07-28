@@ -17,6 +17,7 @@ $(".plus").click(function(){
 							"</div>"+
 							"</li>");
 		count++;
+		alert(count);
 	  }else{
 		  alert("最多添加5个");
 	  }
@@ -52,3 +53,11 @@ function result(){
 				document.getElementsByTagName("p")[0].innerHTML = "不是图片类型，请重新上传<br>";
 			}
 }
+
+/*保存后样式修改
+$("#savebt").click(function(){
+	alert(1);
+	$(".cover-img-top-title").remove();
+	$(".cover-img-top-title").css('background-color','red');
+
+});*/

@@ -4,16 +4,20 @@
 <mapper namespace="com.hzbc.app.admin.cms.dao.NewsDao">
 	
 	<insert id="addNews" parameterType="com.hzbc.app.admin.cms.entity.News" >
-		insert into t_news(id,newsName,newsContent,newsUpDate,newsImg,newsFlag,adminId) values(#{id},#{newsName},#{newsContent},#{newsUpDate},#{newsImg},#{newsFlag},#{adminId})
+		insert into t_news(id,newsName,newsContent,newsUpDate,newsImg,adminId,newsTop) values(#{id},#{newsName},#{newsContent},#{newsUpDate},#{newsImg},#{adminId},#{newsTop})
 	</insert>
 	
-	<select id="findNewsById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
-			
+	<select id="findNewsByFlag" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
+		select id,newsName,newsImg from t_news where newsFlag = #{flag};
 	</select>
 	<select id="findNewsByTime" resultType="com.hzbc.app.admin.cms.entity.News">
-		select id,newsName,newsImg from t_news where newsFlag = 0 order by newsUpDate desc;
-	</select>
+		select id,newsName,newsImg from t_news where newsFlag = 0 order by newsUpDate asc
+			</select>
 		
+	<select id="findNewsByTop" resultType="com.hzbc.app.admin.cms.entity.News">
+		select id,newsName,newsImg from t_news where newsTop = 1;
+	</select>
+	
 	<select id="findNews" resultType="com.hzbc.app.admin.cms.entity.News">
 		select *from t_news;
 	</select>

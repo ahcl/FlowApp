@@ -10,4 +10,5 @@ public interface NewsDao {
 	public void addNews(News news);
 	public List<News> findNews();
 	public List<News> findNewsByTime();
+	public List<News> findNewsByTop();
 }
