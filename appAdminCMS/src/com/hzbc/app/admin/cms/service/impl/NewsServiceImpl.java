@@ -36,5 +36,21 @@ public class NewsServiceImpl implements NewsService {
 		// TODO Auto-generated method stub
 		return newsDao.findNewsByTop();
 	}
+	@Override
+	public void updateNewsFlag() {
+		// TODO Auto-generated method stub
+		newsDao.updateNewsFlag();
+	}
+	@Override
+	public List<News> findUpNewsByFlag() {
+		// TODO Auto-generated method stub
+		return newsDao.findUpNewsByFlag();
+	}
+	@Override
+	public void deleteNewsById(Integer id) {
+		// TODO Auto-generated method stub
+		newsDao.deleteNewsById(id);
+	}
+	
 
 }

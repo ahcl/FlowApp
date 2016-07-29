@@ -11,4 +11,7 @@ public interface NewsDao {
 	public List<News> findNews();
 	public List<News> findNewsByTime();
 	public List<News> findNewsByTop();
+	public void updateNewsFlag();
+	public List<News> findUpNewsByFlag();
+	public void deleteNewsById(Integer id);
 }

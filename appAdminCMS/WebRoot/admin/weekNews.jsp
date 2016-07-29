@@ -134,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="icon-align-justify"></i>									
 								</span>
 								<h5>发布列表</h5>
-								</div>
+							</div>
 							<div class="widget-content nopadding">
 								<ul class="thumbnails">
 								<li class="span11" id="listyle">
@@ -183,12 +183,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a>
 										<div class="actions">
 										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-										<a title="" href="#"><i class="icon-remove icon-white"></i></a>
+										<a title="" href="javaScript:delNews(${news2.id })"><i class="icon-remove icon-white"></i></a>
 										</div>
 									</li>
 									</c:forEach>
 								</ul>
-								<div class="span10 divplus">
+								<div class="span11 divplus">
 										<a class="thumbnail plus">
 											<i class="icon-plus icon-white"></i>&nbsp;添加
 										</a>
@@ -197,7 +197,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</a> -->	
 										
 								</div>
-								<button type="submit" class="btn btn-primary bnt-new btn-plus">发布</button>
+								<%-- <button type="submit" class="btn btn-primary bnt-new btn-plus" >发布</button> --%>
+							<div class="span11 divplus">
+										<a class="thumbnail upplus" href="${pageContext.request.contextPath}/news/upNews.do">
+											发布
+										</a>
+						<!-- 	</div> -->
+										
+								</div>
 							</div>
 						</div>
 					</div>
@@ -271,48 +278,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th>周报标题</th>
 									<th>发布时间</th>
 									<th>发布人</th>
-									<th>是否发布</th>
+									<!-- <th>是否发布</th> -->
 									<th>是否删除</th>
 									<th>预览</th>
-									<th>周报修改</th>
+									<!-- <th>周报修改</th> -->
 									</tr>
 									</thead>
 									<tbody>
-									<c:forEach items="${news}" var="news">
+									<c:forEach items="${upNews}" var="upNews">
 									<tr class="gradeX">
-									<td>${news.id}</td>
-									<td>${news.newsName}</td>
-									<td>${news.newsUpDate}</td>
-									<td>${news.adminId}</td>
-									<td class="action-td">	
+									<td>${upNews.id}</td>
+									<td>${upNews.newsName}</td>
+									<td>${upNews.newsUpDate}</td>
+									<td>${upNews.adminId}</td>
+									<%-- <td class="action-td">	
 										<c:choose>
-											<c:when test="${news.newsFlag==1}">
-												<a href="javascript:delUpdateFlag(${news.id });" class="btn btn-small btnnew">
+											<c:when test="${upNews.newsFlag==1}">
+												<a href="javascript:delUpdateFlag(${upNews.id });" class="btn btn-small btnnew">
 													<i class="icon-remove"></i>						
 												</a>
 											</c:when>
 											<c:otherwise>
-												<a href="javascript:updateFlag(${news.id });" class="btn btn-small btn-warning">
+												<a href="javascript:updateFlag(${upNews.id });" class="btn btn-small btn-warning">
 													<i class="icon-ok"></i>								
 												</a>
 											</c:otherwise>
 										</c:choose>
-									</td>
+									</td> --%>
 									<td class="action-td">	
-										<a href="javascript:delActive(${news.id });" class="btn btn-small btnnew">
+										<a href="javascript:delNews(${upNews.id });" class="btn btn-small btnnew">
 													<i class="icon-remove"></i>						
 												</a>
 									</td>
 									<td>
-									<a href="active/findActive.do?id=${news.id }" class="btn btn-small btnnew">
+									<a href="active/findActive.do?id=${upNews.id }" class="btn btn-small btnnew">
 											查看					
 									</a>
 									</td>
-									<td>
-									<a href="javascript:delUpdateFlag(${news.id });" class="btn btn-small btnnew">
+								<%-- 	<td>
+									<a href="javascript:delUpdateFlag(${upNews.id });" class="btn btn-small btnnew">
 											修改					
 									</a>
-									</td>
+									</td> --%>
 									</tr>
 									</c:forEach>
 									</tbody>
@@ -325,7 +332,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 				<div class="row-fluid">
 					<div id="footer" class="span12">
-						2012 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
+						2016 &copy; carrycheng Admin.<!--  Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a> -->
 					</div>
 				</div>
 			</div>

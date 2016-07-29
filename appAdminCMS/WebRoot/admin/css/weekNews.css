@@ -10,10 +10,11 @@
 	background-color:rgb(221,221,221) !important;
 	color:white !important;
 	font-weight: bolder;
+	text-align: center;
 }
-.icon-plus{
+/* .icon-plus{
 	margin-left:100px !important;
-}
+} */
 input[type="text"]{
 	height:30px;
 }
@@ -69,11 +70,17 @@ textarea{
 }
 
 .divplus{
-	margin-left:26px !important; 	
+	margin-top:10px !important; 	
 }
-.btn-plus{
-	width:250px;
-	margin:10px 26px !important;
+.upplus{
+	background-color:rgb(221,221,221) !important;
+	color:white !important;
+	font-weight: bolder;
+	text-align:center !important;
+	background-color:rgb(0,115,204) !important;
+}
+.upplus:hover{
+	background-color:rgb(10,72,227) !important; 
 }
 .images{
 	width:100%;
@@ -82,4 +89,7 @@ textarea{
 .actions-new{
 	width:13px !important;
 	margin-left:-16px !important; 
+}
+.table th,.table td{
+	text-align: center;
 }

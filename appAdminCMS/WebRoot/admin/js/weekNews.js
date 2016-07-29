@@ -1,8 +1,9 @@
 var count = 0;
 //添加新闻
 $(".plus").click(function(){
-	  if(count<=4){
-		$(".thumbnails").append("<li class='span11'>"+
+	  if(count<4){
+		  count++;
+		$(".thumbnails").append("<li class='span11 clear"+count+"'>"+
 							"<a href='#' class='thumbnail'>"+
 							"<div class='cover-img-little'>"+
 							"<div class='cover-img-little-left'>"+
@@ -13,13 +14,13 @@ $(".plus").click(function(){
 							"</a>" +
 							"<div class='actions'>"+
 							"<a title='' href='#'><i class='icon-pencil icon-white'></i></a>"+
-							"<a title='' href=''#'><i class='icon-remove icon-white'></i></a>"+
+							"<a title='' href='javaScript:del("+count+")'><i class='icon-remove icon-white'></i></a>"+
 							"</div>"+
 							"</li>");
-		count++;
-		alert(count);
+		
+		//alert(count);
 	  }else{
-		  alert("最多添加5个");
+		  alert("最多添加4个");
 	  }
 });
 
@@ -61,3 +62,17 @@ $("#savebt").click(function(){
 	$(".cover-img-top-title").css('background-color','red');
 
 });*/
+
+//删除添加框
+function del(ccc){
+	$(".clear"+count).remove();
+	count--;
+	//alert(count);
+}
+
+//删除保存新闻
+function delNews(id){
+	if(confirm('是否删除')){
+		 window.location.href="news/delNews.do?id="+id;
+	}
+}

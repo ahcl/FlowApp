@@ -7,12 +7,17 @@
 		insert into t_news(id,newsName,newsContent,newsUpDate,newsImg,adminId,newsTop) values(#{id},#{newsName},#{newsContent},#{newsUpDate},#{newsImg},#{adminId},#{newsTop})
 	</insert>
 	
-	<select id="findNewsByFlag" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
-		select id,newsName,newsImg from t_news where newsFlag = #{flag};
+	<select id="findNewsById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
+		select id,newsName,newsImg from t_news where id = #{id};
 	</select>
+	
+	<select id="findUpNewsByFlag" resultType="com.hzbc.app.admin.cms.entity.News">
+		select id,newsName,newsImg from t_news where newsFlag != 0;
+	</select>
+	
 	<select id="findNewsByTime" resultType="com.hzbc.app.admin.cms.entity.News">
 		select id,newsName,newsImg from t_news where newsFlag = 0 order by newsUpDate asc
-			</select>
+	</select>
 		
 	<select id="findNewsByTop" resultType="com.hzbc.app.admin.cms.entity.News">
 		select id,newsName,newsImg from t_news where newsTop = 1;
@@ -23,9 +28,11 @@
 	</select>
 	
 	<delete id="deleteNewsById" parameterType="int">
+		delete from t_news where id = #{id};
 	</delete>
 	
-	<update id="updateFlagById" parameterType="int">
+	<update id="updateNewsFlag">
+		 update t_news set newsFlag = 1 where newsFlag = 0;
 	</update>
 	<update id="delUpdateFlagById" parameterType="int">
 	</update>

@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="#"><i class="icon icon-th-list"></i> <span>流量管理</span></a>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/active/findAll.do">活动管理</a></li>
-						<li><a href="${pageContext.request.contextPath}/admin/weekNews.jsp">周报管理</a></li>
+						<li><a href="${pageContext.request.contextPath}/news/showNews.do">周报管理</a></li>
 						<li><a href="form-wizard.html">Wizard</a></li>
 					</ul>
 				</li>

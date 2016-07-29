@@ -58,13 +58,37 @@ public class NewsController {
 		/*List<News> news1  = newsService.findNews();*/
 		List<News> news2 = newsService.findNewsByTime();
 		List<News> newsTop = newsService.findNewsByTop();
+		List<News> upNews = newsService.findUpNewsByFlag();
+		
 		//System.out.println(active);
 		System.out.println(news2);
 		request.setAttribute("check", 1);
 		model.addAttribute("news2",news2);
 		model.addAttribute("newsTop", newsTop);
+		model.addAttribute("upNews", upNews);
 		return "../admin/weekNews";
 		
+	}
+	
+	@RequestMapping("upNews")
+	public String upNews(){
+		newsService.updateNewsFlag();
+		/*List<News> upNews = newsService.findUpNewsByFlag();
+		model.addAttribute("upNews", upNews);*/
+		return "redirect:showNews.do";
+	}
+	
+	@RequestMapping("showNews")
+	public String showNews(Model model){
+		List<News> upNews = newsService.findUpNewsByFlag();
+		model.addAttribute("upNews", upNews);
+		return "../admin/weekNews";
+	}
+	
+	@RequestMapping("delNews")
+	public String delNews(Integer id){
+		newsService.deleteNewsById(id);
+		return "redirect:findAll.do";
 	}
 	
 }
