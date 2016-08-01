@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="findNewsById" parameterType="int" resultType="com.hzbc.app.admin.cms.entity.News">
-		select id,newsName,newsImg from t_news where id = #{id};
+		select id,newsName,newsContent,newsImg from t_news where id = #{id};
 	</select>
 	
 	<select id="findUpNewsByFlag" resultType="com.hzbc.app.admin.cms.entity.News">
@@ -28,7 +28,7 @@
 	</select>
 	
 	<delete id="deleteNewsById" parameterType="int">
-		delete from t_news where id = #{id};
+		delete from t_news where id = #{id,jdbcType=NUMERIC};
 	</delete>
 	
 	<update id="updateNewsFlag">
@@ -37,6 +37,10 @@
 	<update id="delUpdateFlagById" parameterType="int">
 	</update>
 	
-	<select id="showFourth" resultType="com.hzbc.app.admin.cms.entity.Active">
+	<update id="modifyNews" parameterType="com.hzbc.app.admin.cms.entity.News">
+		update t_news set newsName = #{newsName} , newsContent =#{newsCountent} , newsImg = #{newsImg} where id = #{id,jdbcType=NUMERIC};
+	</update>
+		
+	<select id="showFourth" resultType="com.hzbc.app.admin.cms.entity.News">
 	</select>
 </mapper>

@@ -182,8 +182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 										</a>
 										<div class="actions">
-										<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-										<a title="" href="javaScript:delNews(${news2.id })"><i class="icon-remove icon-white"></i></a>
+										<a title="" href="javaScript:modifyNews(${news2.id})"><i class="icon-pencil icon-white"></i></a>
+										<a title="" href="javaScript:delNews(${news2.id})"><i class="icon-remove icon-white"></i></a>
 										</div>
 									</li>
 									</c:forEach>
@@ -222,14 +222,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="control-group">
 										<label class="control-label">周报标题</label>
 										<div class="controls">
-											<input type="text" name="newsName"/>
+											<input type="text" name="newsName" id="newsName"/>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">周报内容</label>
 										<div class="controls">
 											<!-- <textarea name="activeContent"></textarea> -->
-											<textarea name="newsContent" visibility:hidden;"></textarea>
+											<textarea name="newsContent" visibility:hidden;" id="newsContent"></textarea>
 											<br />
 										</div>
 									</div>

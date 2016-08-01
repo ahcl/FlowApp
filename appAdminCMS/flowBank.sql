@@ -25,3 +25,11 @@ CREATE TABLE t_news(
 	)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 alter table t_news add newsTop int default '0';
+
+CREATE TABLE t_flow(
+		id int PRIMARY KEY auto_increment,
+		flowName int not null,
+		flowPrice float NOT NULL,
+		flowNumber int NOT NULL,
+		flowDate timestamp NULL DEFAULT NULL
+	)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

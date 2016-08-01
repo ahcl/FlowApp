@@ -1,4 +1,5 @@
 var count = 0;
+var number = 0;
 //添加新闻
 $(".plus").click(function(){
 	  if(count<4){
@@ -45,6 +46,9 @@ function result(){
 			img.style.width="200px";
 			div2.style.display="block";
 			div2.appendChild(img);
+			number++;
+			$("img").addClass("img"+number);
+			$("#d2").append("<a title='' href='javaScript:delImg("+number+")'><i class='icon-remove remove"+number+"'></i></a>");
 			//activeImg.value=fr.result;
 			//alert(document.f1.f.name);
 			};
@@ -70,9 +74,34 @@ function del(ccc){
 	//alert(count);
 }
 
+//删除图片
+function delImg(number){
+	$(".img"+number).remove();
+	$(".remove"+number).remove();
+}
 //删除保存新闻
 function delNews(id){
 	if(confirm('是否删除')){
 		 window.location.href="news/delNews.do?id="+id;
 	}
+}
+
+//编辑表单修改
+function modifyNews(id){
+	$.ajax({
+		   type: "POST",
+		   url: "news/findNewsById.do",
+		   data: "id="+id,
+		   dataType:"json",
+		   success: function(data){
+				   //alert(data[0].newsName);
+			   $("#newsName").val(data[0].newsName);
+			   KindEditor.html("#newsContent",data[0].newsContent); 
+			   $("#d2").append("<img src='/flowApp/"+data[0].newsImg+"'>");
+			   $("#d2").append("<a title='' href='javaScript:delImg("+data[0].id+")'><i class='icon-remove remove"+data[0].id+"'></i></a>");
+			   $("img").addClass("img"+data[0].id);
+			   $("#savebt").remove();
+			   $(".form-actions").append("<button type='submit' class='btn btn-primary bnt-new' id='savebt'>修改保存</button>");
+		   }
+		});
 }

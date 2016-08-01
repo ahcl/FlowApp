@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hzbc.app.admin.cms.entity.Active;
@@ -61,13 +62,22 @@ public class NewsController {
 		List<News> upNews = newsService.findUpNewsByFlag();
 		
 		//System.out.println(active);
-		System.out.println(news2);
+		//System.out.println(news2);
 		request.setAttribute("check", 1);
 		model.addAttribute("news2",news2);
 		model.addAttribute("newsTop", newsTop);
 		model.addAttribute("upNews", upNews);
 		return "../admin/weekNews";
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("findNewsById")
+	public List<News> findNewsById(int id){
+		System.out.println(id);
+		List<News> NewsLists = newsService.findNewsById(id);
+		System.out.println(NewsLists);
+		return NewsLists;
 	}
 	
 	@RequestMapping("upNews")

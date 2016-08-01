@@ -19,6 +19,13 @@ public interface NewsService {
 	public List<News> findNews();
 
 	/**
+	 * 根据id查找新闻
+	 * @param id
+	 * @return
+	 */
+	public List<News> findNewsById(Integer id);
+	
+	/**
 	 * 按照时间显示最新保存的新闻
 	 * @return
 	 */
@@ -46,4 +53,11 @@ public interface NewsService {
 	 * @param id 新闻id
 	 */
 	public void deleteNewsById(Integer id);
+
+	/**
+	 * 修改新闻内容
+	 * @param news
+	 * @return
+	 */
+	public List<News> modifyNews(News news);
 }
